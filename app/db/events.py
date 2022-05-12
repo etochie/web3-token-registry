@@ -1,20 +1,16 @@
 from fastapi import FastAPI
 from loguru import logger
 
-from playhouse.pool import PooledPostgresqlExtDatabase
-
-
 from app.core.settings.app import AppSettings
+from app.db import db
 
 
 async def connect_to_db(app: FastAPI, settings: AppSettings) -> None:
     logger.info("Connecting to PostgreSQL")
+    db.connect()
 
-    app.state.pool = PooledPostgresqlExtDatabase(
-        database=str(settings.database_url),
-        min_size=settings.min_connection_count,
-        max_size=settings.max_connection_count,
-    )
+    logger.info("Creating tables")
+    db.create_tables([])
 
     logger.info("Connection established")
 
@@ -22,6 +18,6 @@ async def connect_to_db(app: FastAPI, settings: AppSettings) -> None:
 async def close_db_connection(app: FastAPI) -> None:
     logger.info("Closing connection to database")
 
-    await app.state.pool.close()
+    await db.close()
 
     logger.info("Connection closed")
