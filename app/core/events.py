@@ -1,7 +1,6 @@
-from typing import Callable
-
 from fastapi import FastAPI
 from loguru import logger
+from typing import Callable
 
 from app.core.settings.app import AppSettings
 from app.db.events import close_db_connection

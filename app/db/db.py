@@ -1,9 +1,7 @@
+import peewee as pw
 from contextvars import ContextVar
 
-import peewee as pw
-
 from app.core.config import get_app_settings
-
 
 SETTINGS = get_app_settings()
 

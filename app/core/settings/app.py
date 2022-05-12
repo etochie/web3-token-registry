@@ -1,10 +1,14 @@
-import logging
 import os
 import sys
-from typing import Any, Dict, List, Tuple
+
+import logging
 
 from loguru import logger
 from pydantic import SecretStr
+from typing import Any
+from typing import Dict
+from typing import List
+from typing import Tuple
 
 from app.core.logging import InterceptHandler
 from app.core.settings.base import BaseAppSettings

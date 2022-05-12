@@ -1,8 +1,8 @@
 import logging
-from types import FrameType
-from typing import cast
 
 from loguru import logger
+from types import FrameType
+from typing import cast
 
 
 class InterceptHandler(logging.Handler):

@@ -1,5 +1,6 @@
 from functools import lru_cache
-from typing import Dict, Type
+from typing import Dict
+from typing import Type
 
 from app.core.settings.app import AppSettings
 from app.core.settings.base import AppEnvTypes
