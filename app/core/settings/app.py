@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 from typing import Any, Dict, List, Tuple
 
@@ -20,6 +21,12 @@ class AppSettings(BaseAppSettings):
 
     max_connection_count: int = 10
     min_connection_count: int = 10
+
+    db_name = os.getenv('DB_NAME')
+    db_user = os.getenv('DB_USER')
+    db_password = os.getenv('DB_PASSWORD')
+    db_host = os.getenv('DB_HOST')
+    db_port = os.getenv('DB_PORT')
 
     secret_key: SecretStr
 
