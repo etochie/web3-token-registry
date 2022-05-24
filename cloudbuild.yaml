@@ -1,0 +1,36 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: Pull
+  entrypoint: 'bash'
+  args: ['-c', 'docker pull gcr.io/$PROJECT_ID/frame-web3-token-registry-${_ENV}:latest || exit 0']
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  timeout: 1800s
+  args:
+  - 'build'
+  - '--build-arg'
+  - 'NPM_TOKEN=${_NPM_TOKEN}'
+  - '--build-arg'
+  - 'GOOGLE_ACCOUNT_INFO=${_GOOGLE_ACCOUNT_INFO}'
+  - '--build-arg'
+  - 'SHORT_SHA=${SHORT_SHA}'
+  - '--cache-from'
+  - 'gcr.io/$PROJECT_ID/frame-web3-token-registry-${_ENV}:latest'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/frame-web3-token-registry-${_ENV}:${SHORT_SHA}'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/frame-web3-token-registry-${_ENV}:latest'
+  - '.'
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push short sha tag
+  args:
+  - 'push'
+  - 'gcr.io/$PROJECT_ID/frame-web3-token-registry-${_ENV}:${SHORT_SHA}'
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push latest tag
+  args:
+  - 'push'
+  - 'gcr.io/$PROJECT_ID/frame-web3-token-registry-${_ENV}:latest'

@@ -1,0 +1,18 @@
+version: '3.7'
+
+networks:
+  web3-token-registry-network:
+    name: web3-token-registry-network
+
+services:
+  backend:
+    build: ./
+    hostname: web3-token-registry
+    container_name: web3-token-registry
+    env_file: .env
+    networks:
+      - web3-token-registry-network
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./app/configs:/var/opt/web3-token-registry/configs:ro
