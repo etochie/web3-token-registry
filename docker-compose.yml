@@ -19,6 +19,7 @@ services:
     build: .
     volumes:
       - .:/opt/tickers-project  # for dev only
+      - ./cryptocurrency-icons:/var/assets-collector/cryptocurrency-icons/
     env_file:
       - .env
     ports:

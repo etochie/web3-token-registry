@@ -36,8 +36,6 @@ class AppSettings(BaseAppSettings):
 
     api_prefix: str = "/api"
 
-    jwt_token_prefix: str = "Token"
-
     allowed_hosts: List[str] = ["*"]
 
     logging_level: int = logging.INFO
