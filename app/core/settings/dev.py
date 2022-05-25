@@ -1,11 +1,11 @@
 import logging
 
-from app.core.settings.app import AppSettings
+from core.settings.app import AppSettings
 
 
 class DevAppSettings(AppSettings):
     debug: bool = True
 
-    title: str = "Dev FastAPI example application"
+    title: str = "Dev Web3 Token Registry application"
 
     logging_level: int = logging.DEBUG

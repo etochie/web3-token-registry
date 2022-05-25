@@ -10,15 +10,10 @@ ARG SHORT_SHA
 WORKDIR /var/opt/web3-token-registry
 
 # Adding Pipfiles
-COPY Pipfile Pipfile.lock ./
+COPY ./requirements.txt /tmp/
 
 # Installing dependencies
-RUN apt-get update && apt-get install -y gcc && \
- pip install pipenv && \
- pipenv install --dev --system --deploy --ignore-pipfile && \
- apt-get purge -y gcc pipenv && \
- apt-get autoremove -y && \
- rm -rf /var/lib/apt/lists/*
+RUN pip --no-cache-dir install -r /tmp/requirements.txt
 
 COPY app .
 

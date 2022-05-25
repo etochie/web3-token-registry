@@ -1,15 +1,15 @@
+import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from app.core.config import get_app_settings
-from app.core.events import create_start_app_handler
-from app.core.events import create_stop_app_handler
+from core.config import get_app_settings
+from view.routes import router as api_router
 
-from app.view.routes import router as api_router
+
+settings = get_app_settings()
 
 
 def get_application() -> FastAPI:
-    settings = get_app_settings()
 
     settings.configure_logging()
 
@@ -23,15 +23,6 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    application.add_event_handler(
-        "startup",
-        create_start_app_handler(application, settings),
-    )
-    application.add_event_handler(
-        "shutdown",
-        create_stop_app_handler(application),
-    )
-
     # application.add_exception_handler(HTTPException, http_error_handler)
     # application.add_exception_handler(RequestValidationError, http422_error_handler)
 
@@ -41,3 +32,11 @@ def get_application() -> FastAPI:
 
 
 app = get_application()
+
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",
+        host=settings.app_host,
+        port=settings.app_port,
+    )

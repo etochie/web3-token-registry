@@ -1,3 +1,8 @@
 # Application
 ENV=
-LOGGING_CONFIG_INI=./configs/logging.ini
+SECRET_KEY=
+
+# WEB API
+APP_HOST=
+APP_PORT=
+API_KEY=

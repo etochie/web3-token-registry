@@ -10,8 +10,9 @@ from typing import Dict
 from typing import List
 from typing import Tuple
 
-from app.core.logging import InterceptHandler
-from app.core.settings.base import BaseAppSettings
+from core.logging import InterceptHandler
+from core.settings.base import BaseAppSettings
+from core.version import APP_VERSION
 
 
 class AppSettings(BaseAppSettings):
@@ -20,17 +21,14 @@ class AppSettings(BaseAppSettings):
     openapi_prefix: str = ""
     openapi_url: str = "/openapi.json"
     redoc_url: str = "/redoc"
-    title: str = "FastAPI example application"
-    version: str = "0.0.0"
+    title: str = "Web3 Token Registry application"
+    version: str = APP_VERSION
+
+    app_host: str = os.getenv('APP_HOST')
+    app_port: int = os.getenv('APP_PORT')
 
     max_connection_count: int = 10
     min_connection_count: int = 10
-
-    db_name = os.getenv('DB_NAME')
-    db_user = os.getenv('DB_USER')
-    db_password = os.getenv('DB_PASSWORD')
-    db_host = os.getenv('DB_HOST')
-    db_port = os.getenv('DB_PORT')
 
     secret_key: SecretStr
 
