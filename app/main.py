@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from core.config import get_app_settings
-from view.routes import router as api_router
+from view import router as api_router
 
 
 settings = get_app_settings()
@@ -39,4 +39,5 @@ if __name__ == "__main__":
         "main:app",
         host=settings.app_host,
         port=settings.app_port,
+        reload=settings.debug
     )

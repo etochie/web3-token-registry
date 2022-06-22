@@ -14,3 +14,5 @@ services:
       - web3-token-registry-network
     ports:
       - "8081:8081"
+    volumes:
+      - ./cryptocurrency-icons:/var/web3-token-registry/cryptocurrency-icons
